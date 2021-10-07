@@ -11,10 +11,11 @@ var toDo = [
 
 ];
 
-function renderToDo(){
+function renderToDo() {
 
+    listElement.innerHTML = '';
 
-    for(toDos of toDo){
+    for (toDos of toDo) {
         console.log(toDos);
 
         var toDoElement = document.createElement('li');
@@ -27,4 +28,22 @@ function renderToDo(){
     }
 }
 
-console.log(renderToDo());
+renderToDo();
+
+function adicionarToDo() {
+
+    if (inputElement.value == '') {
+        alert('Digite alguma tarefa!')
+        return false
+    } else {
+        var toDosText = inputElement.value;
+        toDo.push(toDosText);
+        inputElement.value = '';
+        renderToDo();
+    }
+
+}
+
+buttonElement.onclick = adicionarToDo;
+
+
