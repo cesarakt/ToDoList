@@ -4,12 +4,7 @@ var inputElement = document.querySelector('#app input');
 
 var buttonElement = document.querySelector('#app button');
 
-var toDo = [
-    'ir ao mercado',
-    'Estudar JavaScript',
-    'Pagar conta de Luz'
-
-];
+var toDo = JSON.parse(localStorage.getItem('lista_todos')) || [];
 
 function renderToDo() {
 
@@ -26,7 +21,7 @@ function renderToDo() {
 
         var posicao = toDo.indexOf(toDos);
 
-        linkElement.setAttribute('onclick', 'deletarToDo('+ posicao +')');
+        linkElement.setAttribute('onclick', 'deletarToDo(' + posicao + ')');
 
         var linkText = document.createTextNode('Excluir');
         linkElement.appendChild(linkText);
@@ -50,15 +45,23 @@ function adicionarToDo() {
         toDo.push(toDosText);
         inputElement.value = '';
         renderToDo();
+        salvarDados();
     }
 
 }
 
+buttonElement.onclick = adicionarToDo;
+
 function deletarToDo(posicao) {
     toDo.splice(posicao, 1);
     renderToDo();
+    salvarDados();
 }
 
-buttonElement.onclick = adicionarToDo;
+function salvarDados() {
+
+    localStorage.setItem('lista_todos', JSON.stringify(toDo));
+}
+
 
 
