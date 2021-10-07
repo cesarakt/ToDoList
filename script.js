@@ -21,9 +21,19 @@ function renderToDo() {
         var toDoElement = document.createElement('li');
         var toDoText = document.createTextNode(toDos);
 
-        toDoElement.appendChild(toDoText);
-        listElement.appendChild(toDoElement);
+        var linkElement = document.createElement('a');
+        linkElement.setAttribute('href', '#');
 
+        var posicao = toDo.indexOf(toDos);
+
+        linkElement.setAttribute('onclick', 'deletarToDo('+ posicao +')');
+
+        var linkText = document.createTextNode('Excluir');
+        linkElement.appendChild(linkText);
+
+        toDoElement.appendChild(toDoText);
+        toDoElement.appendChild(linkElement);
+        listElement.appendChild(toDoElement);
 
     }
 }
@@ -42,6 +52,11 @@ function adicionarToDo() {
         renderToDo();
     }
 
+}
+
+function deletarToDo(posicao) {
+    toDo.splice(posicao, 1);
+    renderToDo();
 }
 
 buttonElement.onclick = adicionarToDo;
